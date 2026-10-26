@@ -52,6 +52,26 @@ def print_audit(df):
                     (numeric[column] > q3 + 1.5 * iqr)).sum()
         print(f'{column}: {int(outliers)}')
 
+    loan_to_income = df['requested_loan_gbp'] / df['annual_income_gbp']
+    q1, q3 = loan_to_income.quantile([0.25, 0.75])
+    iqr_multiplier = 3.5
+    upper_fence = q3 + iqr_multiplier * (q3 - q1)
+    high_loan_to_income = df.loc[loan_to_income > upper_fence, [
+        'application_id', 'annual_income_gbp', 'requested_loan_gbp'
+    ]].copy()
+    high_loan_to_income['loan_to_income_ratio'] = loan_to_income[
+        high_loan_to_income.index
+    ]
+    print(f'\nHigh loan-to-income applications (above {iqr_multiplier} * IQR):')
+    if high_loan_to_income.empty:
+        print('None')
+    else:
+        print(high_loan_to_income.to_string(index=False, formatters={
+            'annual_income_gbp': '{:,.0f}'.format,
+            'requested_loan_gbp': '{:,.0f}'.format,
+            'loan_to_income_ratio': '{:.2f}x'.format,
+        }))
+
     range_checks = {
         'credit_score outside 300-850':
             ((df['credit_score'] < 300) | (df['credit_score'] > 850)).sum(),
