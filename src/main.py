@@ -1,5 +1,7 @@
 """Run the supplied baseline only; assessed advisory rules are NOT provided."""
-from src.data import load_data, print_audit
+from pathlib import Path
+import pandas as pd
+from src.data_cleaning import CLEANED_DATA_FILE
 from src.model import BASELINE_FEATURES, MODEL_FILE, run_baseline
 
 
@@ -12,8 +14,11 @@ def report(name, result):
 
 
 def main():
-    df = load_data()
-    print_audit(df)
+    if not CLEANED_DATA_FILE.is_file():
+        raise FileNotFoundError(f'Cleaned data not found: {CLEANED_DATA_FILE}. Run: python -m src.data_cleaning')
+    df = pd.read_csv(CLEANED_DATA_FILE)
+    print(f'Loaded cleaned data: {df.shape[0]} rows, {df.shape[1]} columns')
+    print(f'Columns: {list(df.columns)}')
     reference_results, baseline_results = run_baseline(df)
     print('\nTutor-selected baseline features:', BASELINE_FEATURES)
     report('Majority-class reference', reference_results)
