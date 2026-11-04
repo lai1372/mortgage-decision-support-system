@@ -2,6 +2,9 @@
 import math
 from numbers import Real
 
+LOW_RISK_THRESHOLD = 0.30
+HIGH_RISK_THRESHOLD = 0.60
+
 
 def validate_application_fields(application, required_fields):
     """Reject absent, blank or non-finite values in the selected fields."""
@@ -27,9 +30,15 @@ def validate_score(score):
     return float(score)
 
 
-def advisory_decision(score, application):
-    """LEARNER TASK: implement their own documented decision table."""
+def advisory_decision(score):
+    """Classify a score into an advisory risk band.
+
+    The middle band is intentionally unclassified because the model score is
+    not calibrated and should not be used to approve or decline an application.
+    """
     validate_score(score)
-    # LEARNER: implement validated application fields, boundary cases and
-    # advisory routing. The system must not automatically approve/decline.
-    raise NotImplementedError('Design and test your own advisory decision rules')
+    if score <= LOW_RISK_THRESHOLD:
+        return 'low risk'
+    if score >= HIGH_RISK_THRESHOLD:
+        return 'high risk'
+    return 'unclassified'

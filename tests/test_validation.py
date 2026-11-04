@@ -1,6 +1,6 @@
 """Examples of testing generic helper functions; not mortgage policy tests."""
 import unittest
-from src.decisions import validate_application_fields, validate_score
+from src.decisions import advisory_decision, validate_application_fields, validate_score
 
 class GenericValidationTests(unittest.TestCase):
     def test_valid_score(self):
@@ -17,6 +17,17 @@ class GenericValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_application_fields({}, ['credit_score'])
 
-# LEARNER: write tests for your own decision table, including invalid and boundary cases.
+    def test_decision_thresholds_and_unclassified_band(self):
+        self.assertEqual(advisory_decision(0.22), 'low risk')
+        self.assertEqual(advisory_decision(0.30), 'low risk')
+        self.assertEqual(advisory_decision(0.31), 'unclassified')
+        self.assertEqual(advisory_decision(0.59), 'unclassified')
+        self.assertEqual(advisory_decision(0.60), 'high risk')
+        self.assertEqual(advisory_decision(0.71), 'high risk')
+
+    def test_decision_rejects_invalid_score(self):
+        with self.assertRaises(ValueError):
+            advisory_decision(1.1)
+
 if __name__ == '__main__':
     unittest.main()

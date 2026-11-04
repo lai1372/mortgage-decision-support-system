@@ -11,7 +11,7 @@ import joblib
 import pandas as pd
 
 from src.model import MODEL_FILE, BASELINE_FEATURES
-from src.decisions import validate_application_fields, validate_score
+from src.decisions import advisory_decision, validate_application_fields, validate_score
 
 # Sample values for the TWO-FEATURE model. Do not use actual customer information.
 EXAMPLE_APPLICATION = {
@@ -36,15 +36,15 @@ def score_example(application):
 
 def main():
     score = score_example(EXAMPLE_APPLICATION)
+    risk_band = advisory_decision(score)
     print("MORTGAGE APPLICATION ASSESSMENT")
     print("Applicant details:")
     print(f"credit_score={EXAMPLE_APPLICATION['credit_score']}")
     print(f"debt_to_income_ratio={EXAMPLE_APPLICATION['debt_to_income_ratio']:.2f}")
     print(f"Repayment-difficulty class-1 score: {score:.3f}")
     print("Calibration not assessed; this is not a validated PD.")
-    print("Provisional recommendation: PENDING — rules not yet implemented")
+    print(f"Advisory risk classification: {risk_band.upper()}")
     print("Status: AWAITING HUMAN REVIEW — no mortgage approved or declined")
-    print("NEXT: implement and test your own decision rules from Week 6")
 
 
 if __name__ == "__main__":
