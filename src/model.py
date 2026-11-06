@@ -17,8 +17,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from src.data import TARGET
 
-# TUTOR SELECTED: two numeric predictors only, intentionally limited.
-BASELINE_FEATURES = ['credit_score', 'debt_to_income_ratio']
+# TUTOR SELECTED: three numeric predictors including missed payment history.
+BASELINE_FEATURES = ['credit_score', 'debt_to_income_ratio', 'missed_payments_24m']
 MODEL_FILE = Path(__file__).resolve().parents[1] / 'models' / 'baseline_model.joblib'
 
 
