@@ -21,8 +21,8 @@ class GenericValidationTests(unittest.TestCase):
         self.assertEqual(advisory_decision(0.22), 'low risk')
         self.assertEqual(advisory_decision(0.30), 'low risk')
         self.assertEqual(advisory_decision(0.31), 'unclassified')
-        self.assertEqual(advisory_decision(0.59), 'unclassified')
-        self.assertEqual(advisory_decision(0.60), 'high risk')
+        self.assertEqual(advisory_decision(0.49), 'unclassified')
+        self.assertEqual(advisory_decision(0.50), 'high risk')
         self.assertEqual(advisory_decision(0.71), 'high risk')
 
     def test_decision_rejects_invalid_score(self):

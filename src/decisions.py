@@ -3,7 +3,7 @@ import math
 from numbers import Real
 
 LOW_RISK_THRESHOLD = 0.30
-HIGH_RISK_THRESHOLD = 0.60
+HIGH_RISK_THRESHOLD = 0.50
 
 
 def validate_application_fields(application, required_fields):

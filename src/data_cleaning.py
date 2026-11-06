@@ -18,6 +18,7 @@ NUMERIC_COLUMNS = (
     'credit_score',
     'employment_years',
     'savings_gbp',
+    'missed_payments_24m',
     'credit_utilisation_pct',
     'interest_rate_pct',
 )
@@ -27,6 +28,7 @@ SELECTED_COLUMNS = (
     'application_id',
     'credit_score',
     'debt_to_income_ratio',
+    'missed_payments_24m',
     'loan_to_value_pct',
     'repayment_difficulty_12m',
 )
