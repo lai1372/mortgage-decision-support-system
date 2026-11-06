@@ -46,7 +46,26 @@ python3 -m src.main
 
 ---
 
-### 3. Score an Applicant
+### 3. Launch Interactive Risk Assessment GUI
+```bash
+python3 -m streamlit run app.py
+```
+**What it does:** Starts a web-based interactive dashboard for real-time mortgage risk assessment. Enter an applicant's credit score, debt-to-income ratio, and missed payments to get an instant risk classification.
+
+**Features:**
+- Interactive input fields with validation
+- Real-time risk score calculation (0.0 to 1.0)
+- Colour-coded risk classification:
+  - 🟢 **LOW RISK** (Score ≤ 0.30): Auto-Approve
+  - 🟡 **UNCLASSIFIED** (0.30 < Score < 0.50): Manual Review
+  - 🔴 **HIGH RISK** (Score ≥ 0.50): Auto-Decline
+- Model performance metrics and feature information in sidebar
+
+**Output:** Web dashboard at `http://localhost:8501/`
+
+---
+
+### 4. Score an Applicant (Command-Line)
 ```bash
 python3 -m src.applicant_example
 ```
@@ -56,7 +75,7 @@ python3 -m src.applicant_example
 
 ---
 
-### 4. Run Tests
+### 5. Run Tests
 ```bash
 python3 -m unittest tests.test_model -v
 ```
