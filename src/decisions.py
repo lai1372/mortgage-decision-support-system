@@ -33,12 +33,12 @@ def validate_score(score):
 def advisory_decision(score):
     """Classify a score into an advisory risk band.
 
-    The middle band is intentionally unclassified because the model score is
-    not calibrated and should not be used to approve or decline an application.
+    The middle band requires further review because the model score is not
+    calibrated and should not be used to support approving or declining an application.
     """
     validate_score(score)
     if score <= LOW_RISK_THRESHOLD:
         return 'low risk'
     if score >= HIGH_RISK_THRESHOLD:
         return 'high risk'
-    return 'unclassified'
+    return 'further review'
