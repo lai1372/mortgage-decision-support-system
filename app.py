@@ -94,9 +94,9 @@ if st.button("🔍 Assess Risk", use_container_width=True, type="primary"):
                 st.metric("Classification", "🔴 HIGH RISK")
             st.error("High likelihood of repayment difficulty - human review required")
 
-        else:  # unclassified
+        else:  # further review
             with result_col2:
-                st.metric("Classification", "🟡 UNCLASSIFIED")
+                st.metric("Classification", "🟡 FURTHER REVIEW")
             st.warning("Score requires human assessment")
 
 

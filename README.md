@@ -57,7 +57,7 @@ python3 -m streamlit run app.py
 - Real-time risk score calculation (0.0 to 1.0)
 - Colour-coded risk classification:
   - 🟢 **LOW RISK** (Score ≤ 0.30): Auto-Approve
-  - 🟡 **UNCLASSIFIED** (0.30 < Score < 0.50): Manual Review
+  - 🟡 **FURTHER REVIEW** (0.30 < Score < 0.50): Manual Review
   - 🔴 **HIGH RISK** (Score ≥ 0.50): Auto-Decline
 - Model performance metrics and feature information in sidebar
 

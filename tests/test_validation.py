@@ -17,11 +17,11 @@ class GenericValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_application_fields({}, ['credit_score'])
 
-    def test_decision_thresholds_and_unclassified_band(self):
+    def test_decision_thresholds_and_further_review_band(self):    
         self.assertEqual(advisory_decision(0.22), 'low risk')
         self.assertEqual(advisory_decision(0.30), 'low risk')
-        self.assertEqual(advisory_decision(0.31), 'unclassified')
-        self.assertEqual(advisory_decision(0.49), 'unclassified')
+        self.assertEqual(advisory_decision(0.31), 'further review')
+        self.assertEqual(advisory_decision(0.49), 'further review')
         self.assertEqual(advisory_decision(0.50), 'high risk')
         self.assertEqual(advisory_decision(0.71), 'high risk')
 
